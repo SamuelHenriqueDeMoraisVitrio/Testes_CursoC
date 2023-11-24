@@ -22,8 +22,29 @@ int main(){
     //variavel pontos
     double pontos = 1000;
 
+    int nivel;
+    printf("Qual o nível de dificuldade?\n");
+    printf("(1) Fácil (2) Médio (3) Difícil\n\n");
+    printf("Escolha: ");
+    scanf("%d", &nivel);
+
+    int acertou = 0;
+    short numeroTentativas;
+
+    switch(nivel){
+        case 1:
+            numeroTentativas = 18;
+            break;
+        case 2:
+            numeroTentativas = 10;
+            break;
+        default:
+            numeroTentativas = 6;
+            break;
+    }
+
     //Faca enquanto for verdadeira, no caso para sempre
-    while(1){
+    for(int i = 1; i <= numeroTentativas; i++){
         //escreve o numero de tentativas
         printf("tentativa %d\n", tentativas);
         //escreve
@@ -41,15 +62,12 @@ int main(){
         }
 
         //variavel acertou que recebe um valor boleano
-        int acertou = (chute == numeroSecreto);
+        acertou = (chute == numeroSecreto);
         //maior recebe valor boleano
         int maior = chute > numeroSecreto;
 
         //se acertou for verdadeiro sai do while.
         if(acertou){
-            printf("Parabens! Voce acertou\n");
-            printf("Jogue de novo, voce e um bom jogador!\n");
-
             break;
         //se maior for verdadeiro manda msg e prossegui
         }else if(maior){
@@ -68,9 +86,14 @@ int main(){
         pontos = pontos - abs(pontosPerdidos);
     }
 
-    printf("Fim de jogo!\n");
-    printf("Voce acertou em %d tentativas\n", tentativas);
-    printf("Total de pontos = %.2f \n", pontos);
+    printf("Fim de jogo!\n\n");
+    if(acertou){
+        printf("Você ganhou!\n");
+        printf("Você acertou em %d tentativas!\n", tentativas);
+        printf("Total de pontos: %.1f\n", pontos);
+    } else {
+        printf("Você perdeu! Tente de novo!\n");
+    }
 
     sleep(8);
 
